@@ -330,8 +330,8 @@ async function downloadImage(imageURL) {
 }
 
 const siteData = reactive({
-      title: `My website`,
-      description: `My beautiful website`,
+      title: `The Institute of Chartered Accountants of India `,
+      description: `The Institute of Chartered Accountants of India, Committee on MSME & Startup, ICAI`,
     })
 
     useHead({
@@ -341,6 +341,7 @@ const siteData = reactive({
         {
           name: `description`,
           content: () => siteData.description,
+          
         },
       ],
     })
