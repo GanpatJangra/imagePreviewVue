@@ -7,7 +7,6 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
@@ -16,15 +15,15 @@
     "vite": "^4.3.5"
   },
   "dependencies": {
-    "pinia": "^2.0.36",
-    "vue": "^3.3.2",
-    "vue-router": "^4.2.0",
+    "@vueuse/head": "^0.9.3",
     "axios": "^1.4.0",
     "cropperjs": "^1.5.13",
     "croppie": "^2.6.5",
     "daisyui": "^2.51.6",
-    "jimp": "^0.22.8",
+    "pinia": "^2.0.36",
+    "vue": "^3.3.2",
     "vue-cropperjs": "^5.0.0",
-    "vue-croppie": "^2.0.2"
+    "vue-croppie": "^2.0.2",
+    "vue-router": "^4.2.0"
   }
 }

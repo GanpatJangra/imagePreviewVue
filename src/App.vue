@@ -4,7 +4,7 @@
             <input ref="openModelRef" type="checkbox" id="my-modal-6" class="modal-toggle" />
             <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">
-                    <vue-cropper ref="cropper" :aspect-ratio="16 / 16" :scalable="false" :cropBoxResizable="false"
+                    <vue-cropper ref="cropper" class="!h-[400px]" :aspect-ratio="16 / 16" :scalable="false" :cropBoxResizable="false"
                         :src="formData.profile_image" dragMode="none" preview=".preview" />
                     <div>
                         <input @change="handelImageRangeValue" v-model.number.lazy="imageRangeValue" type="range" min="-0.5"
@@ -23,7 +23,7 @@
         <!-- {{ imageUrl }} -->
         <div>
             <input ref="openModelViewImageRef" type="checkbox" id="my-modal-200" class="modal-toggle" />
-            <div class="modal modal-bottom sm:modal-middle">
+            <div class="modal modal-bottom  sm:modal-middle">
                 <div class="modal-box">
                     <img id="myImage" :src="imageUrl" alt="">
                     <div class="modal-action justify-between">
@@ -170,9 +170,10 @@
     </div>
 </template>
 <script setup>
+import { useHead } from "@vueuse/head"
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
-import { ref, computed, watch } from 'vue';
+import { ref, computed,reactive, watch } from 'vue';
 import axios from 'axios';
 const formData = ref({
     profile_image: null,
@@ -201,11 +202,23 @@ function handelImageRangeValue() {
     //     this.$refs.cropper.relativeZoom(percent);
     //   },
 }
-function zooooooooom() {
-    alert(
-        'faksldfjla'
-    )
-}
+
+
+// Set the canvas data with the custom size
+
+// function zooooooooom() {
+//     alert(
+//         'faksldfjla'
+//     )
+// }
+
+
+// const customSize = {
+//   left: 0,       // The offset left of the canvas
+//   top: 0,        // The offset top of the canvas
+//   width: 500,    // The new width of the canvas
+//   height: 400    // The new height of the canvas
+// }
 function handelFileData(e) {
     // openModelRef.value.click()
     // return
@@ -223,6 +236,7 @@ function handelFileData(e) {
             cropper.value.replace(event.target.result);
         };
         reader.readAsDataURL(file);
+        // cropper.value.setCanvasData(customSize);
         openModelRef.value.click()
     } else {
         alert('Sorry, FileReader API not supported');
@@ -314,6 +328,22 @@ async function downloadImage(imageURL) {
         console.error('Error downloading image:', error);
     }
 }
+
+const siteData = reactive({
+      title: `My website`,
+      description: `My beautiful website`,
+    })
+
+    useHead({
+      // Can be static or computed
+      title: () => siteData.title,
+      meta: [
+        {
+          name: `description`,
+          content: () => siteData.description,
+        },
+      ],
+    })
 console.log('v12')
 </script>
 <style>
