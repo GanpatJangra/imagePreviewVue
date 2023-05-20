@@ -36,9 +36,9 @@
           </div>
       </div>
       <div class="bg-[#4406CB] w-full h-64">
-          <img class="rounded-md mx-auto pt-14" src="https://dev.urja360.com/icai/assets/img/logo.png" alt="">
+          <img class="rounded-md h-40 mx-auto pt-14" src="@/assets/image/LogoICAI.png" alt="logo">
       </div>
-      <div class="-mt-24 md:w-2/3 w-[90%]  bg-white rounded mx-auto ">
+      <div class="-mt-20 md:w-2/3 w-[90%]  bg-white rounded mx-auto ">
           <div class="flex flex-col md:flex-row p-5">
               <div class="md:w-1/2 w-full">
                   <img class="  h-full " src="@/assets/image/Image_to_show.jpg" alt="">
@@ -338,6 +338,7 @@ async function downloadImage() {
                         .click();
                     URL.revokeObjectURL(url);
     }
+    console.log('v12')
 </script>
 
 <style>
