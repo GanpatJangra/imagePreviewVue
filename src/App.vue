@@ -4,7 +4,7 @@
           <input ref="openModelRef" type="checkbox" id="my-modal-6" class="modal-toggle" />
           <div class="modal modal-bottom sm:modal-middle">
               <div class="modal-box">
-                  <vue-cropper ref="cropper" :aspect-ratio="16 / 16" :scalable="false" :cropBoxResizable="false" :src="formData.profile_image" dragMode="none" preview=".preview" />
+                  <vue-cropper ref="cropper" :aspect-ratio="16 / 16" :scalable="false" :cropBoxResizable="false" :src="formData.profile_image"  dragMode="none" preview=".preview" />
                   <div>
                       <input @change="handelImageRangeValue" v-model.number.lazy="imageRangeValue" type="range" min="-0.5" max="0.5" step="0.1" class="w-full mt-5 bg-gray-300 rounded-lg focus:outline-none" />
                       <div class="modal-action flex flex-col">
@@ -23,11 +23,14 @@
           <input ref="openModelViewImageRef" type="checkbox" id="my-modal-200" class="modal-toggle" />
           <div  class="modal modal-bottom sm:modal-middle">
               <div class="modal-box">
-                  <img :src="imageUrl" alt="">
+                  <img id="myImage" :src="imageUrl" alt="">
                   <div class="modal-action justify-between">
                       <label for="my-modal-200" class="btn btn-error btn-sm">NO !</label>
-                      <label type="button" @click="DownLoadImage(imageUrl)" class="btn btn-success btn-sm">download
-                          Image</label>
+                      <button type="button" @click="downloadImage(imageUrl)" class="btn btn-success btn-sm">download
+                          Image</button>
+                          <!-- <div class="form_group_new">
+                                            <a class="download-btn" download="Certificate" href="https://dev.urja360.com/icai/uploads/64688d024a552.png">Download Certificate</a>
+                                        </div> -->
                   </div>
               </div>
           </div>
@@ -165,7 +168,7 @@
 <script setup>
 import VueCropper from 'vue-cropperjs';
 import 'cropperjs/dist/cropper.css';
-import { ref, watch } from 'vue';
+import { ref,computed, watch } from 'vue';
 import axios from 'axios';
 const formData = ref({
   profile_image: null,
@@ -267,18 +270,18 @@ async function submitForm() {
           console.error("Error:", error);
       });
 }
-function DownLoadImage() {
-  if (imageUrl.value) {
-      const link = document.createElement('a');
-      link.href = imageUrl.value;
-      // link.target = '_blank';
-      link.download = '';
-      link.click();
-      // link.download = 'Banner-image.png';
-      // link.textContent = 'Download Image';
+// function DownLoadImage() {
+//   if (imageUrl.value) {
+//       const link = document.createElement('a');
+//       link.href = imageUrl.value;
+//       // link.target = '_blank';
+//       link.download = '';
+//       link.click();
+//       // link.download = 'Banner-image.png';
+//       // link.textContent = 'Download Image';
 
-  }
-}
+//   }
+// }
 
 // Function to convert Base64 to Blob
 function base64ToBlob(base64Data) {
@@ -301,6 +304,40 @@ function base64ToBlob(base64Data) {
 
   return new Blob(byteArrays, { type: contentType });
 }
+
+
+// async function downloadImage(url) {
+//   try {
+//     const imageSrc = url;
+
+// } catch (error) {
+//     console.error('Error downloading image:', error);
+//   }
+// }
+
+const liveImageUrl=computed(()=>imageUrl.value)
+async function downloadImage() {
+  console.log("🚀 ~ file: App.vue:333 ~ downloadImage ~ liveImageUrl.value:", liveImageUrl.value)
+      // const imageUrl = url;
+      // const response = await fetch(liveImageUrl);
+      // console.log("🚀 ~ file: App.vue:322 ~ downloadImage ~ response:", response)
+      // const blob = await response.blob();
+
+      // const link = document.createElement('a');
+      // link.href = window.URL.createObjectURL(blob);
+      // link.download = 'image.jpg';
+      // link.click();
+
+      // window.URL.revokeObjectURL(link.href);
+
+      const blob = await (await fetch(liveImageUrl.value)).blob();
+                    console.log("🚀 ~ file: App.vue:333 ~ downloadImage ~ blob:", blob)
+                    const url = URL.createObjectURL(blob);
+                    console.log("🚀 ~ file: App.vue:335 ~ downloadImage ~ url:", url)
+                    Object.assign(document.createElement('a'), { href: url, download: 'image.jpg' })
+                        .click();
+                    URL.revokeObjectURL(url);
+    }
 </script>
 
 <style>
