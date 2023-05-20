@@ -7,7 +7,7 @@
                     <vue-cropper ref="cropper" class="!h-[400px]" :aspect-ratio="16 / 16" :scalable="false" :cropBoxResizable="false"
                         :src="formData.profile_image" dragMode="none" preview=".preview" />
                     <div>
-                        <input @change="handelImageRangeValue" v-model.number.lazy="imageRangeValue" type="range" min="-0.5"
+                        <input @change="handelImageRangeValue" v-model.number="imageRangeValue" type="range" min="-0.5"
                             max="0.5" step="0.1" class="w-full mt-5 bg-gray-300 rounded-lg focus:outline-none" />
                         <div class="modal-action flex flex-col">
                             <!-- <input type="range" min="0" max="100" value="40" class="range h-5 mt-5" /> -->
@@ -25,9 +25,9 @@
             <input ref="openModelViewImageRef" type="checkbox" id="my-modal-200" class="modal-toggle" />
             <div class="modal modal-bottom  sm:modal-middle">
                 <div class="modal-box">
-                    <img id="myImage" :src="imageUrl" alt="">
+                    <img lazy id="myImage" :src="imageUrl" alt="">
                     <div class="modal-action justify-between">
-                        <label for="my-modal-200" class="btn btn-error btn-sm">NO !</label>
+                        <label for="my-modal-200" class="btn btn-error btn-sm">Close !</label>
                         <button type="button" @click="downloadImage(imageUrl)" class="btn btn-success btn-sm">download
                             Image</button>
                         <!-- <div class="form_group_new">
@@ -38,12 +38,12 @@
             </div>
         </div>
         <div class="bg-[#4406CB] w-full h-64">
-            <img class="rounded-md h-40 mx-auto pt-14" src="@/assets/image/LogoICAI.png" alt="logo">
+            <img lazy class="rounded-md h-40 mx-auto pt-14" src="@/assets/image/LogoICAI.png" alt="logo">
         </div>
         <div class="-mt-20 md:w-2/3 w-[90%]  bg-white rounded mx-auto ">
             <div class="flex flex-col md:flex-row p-5">
                 <div class="md:w-1/2 w-full">
-                    <img class="  h-full " src="@/assets/image/Image_to_show.jpg" alt="">
+                    <img lazy class="  h-full " src="@/assets/image/Image_to_show.jpg" alt="">
                 </div>
                 <div class="md:w-1/2 w-full md:px-10">
                     <div>
@@ -322,7 +322,7 @@ async function downloadImage(imageURL) {
         })
         const blob = response.data;
         const url = URL.createObjectURL(blob);
-        Object.assign(document.createElement('a'), { href: url, download: 'image.jpg' }).click();
+        Object.assign(document.createElement('a'), { href: url, download: `${formData.value.name}` }).click();
         URL.revokeObjectURL(url);
     } catch (error) {
         console.error('Error downloading image:', error);
