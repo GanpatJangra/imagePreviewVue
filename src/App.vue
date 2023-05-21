@@ -356,7 +356,7 @@ async function downloadImage(imageURL) {
 }
 
 const siteData = reactive({
-    title: `The Institute of Chartered Accountants of India `,
+    title: `ICAI-Startup-Sphere`,
     description: `The Institute of Chartered Accountants of India, Committee on MSME & Startup, ICAI`,
 })
 
@@ -370,6 +370,14 @@ useHead({
 
         },
     ],
+    link:[
+        {
+            // <link rel="shortcut icon" href="https://cdnicai.s3.ap-south-1.amazonaws.com/images/favicon.ico">
+            rel:'shortcut icon',
+            href:'https://cdnicai.s3.ap-south-1.amazonaws.com/images/favicon.ico'
+        }
+    ]
+    
 })
 console.log('v12')
 </script>
