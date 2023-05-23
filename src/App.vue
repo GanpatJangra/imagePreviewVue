@@ -14,7 +14,7 @@
                         <div class="modal-action flex flex-col">
                             <!-- <input type="range" min="0" max="100" value="40" class="range h-5 mt-5" /> -->
                             <div class="justify-between flex">
-                                <label for="my-modal-6" class="btn btn-sm btn-error">Close !</label>
+                                <label type="button" for="my-modal-6" class="btn btn-sm btn-error">Close !</label>
                                 <button type="button" @click="cropImage" class="btn btn-success btn-sm">Submit</button>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                     <div v-if="imageUrl">
                         <img loading="lazy" id="myImage" :src="imageUrl" alt="">
                         <div class="modal-action justify-between">
-                            <label for="my-modal-200" class="btn btn-error btn-sm">Close !</label>
+                            <label type="button" @click="clearForm" for="my-modal-200" class="btn btn-error btn-sm">Close !</label>
                             <button type="button" @click="downloadImage(imageUrl)" class="btn btn-success btn-sm">download
                                 Image</button>
                         </div>
@@ -68,7 +68,7 @@
         <div class="-mt-20 md:w-2/3 w-[90%]  bg-white rounded mx-auto ">
             <div class="flex flex-col md:flex-row p-5">
                 <div class="md:w-1/2 w-full">
-                    <img loading="lazy" class="  h-full " src="@/assets/image/Image_to_show.jpg" alt="">
+                    <img loading="lazy" class="  h-full " src="@/assets/image/Image-to-Display.jpg" alt="">
                 </div>
                 <div class="md:w-1/2 w-full md:px-10">
                     <div>
@@ -350,6 +350,7 @@ async function downloadImage(imageURL) {
         const url = URL.createObjectURL(blob);
         Object.assign(document.createElement('a'), { href: url, download: `${formData.value.name}` }).click();
         URL.revokeObjectURL(url);
+        clearForm()
     } catch (error) {
         console.error('Error downloading image:', error);
     }
@@ -379,7 +380,15 @@ useHead({
     ]
     
 })
-console.log('v12')
+
+function clearForm(){
+        formData.value.profile_image= null,
+        formData.value.name= '',
+        formData.value.designation= '',
+        formData.value.region_or_branch= '',
+        formData.value.cropProfilePicture= null
+}
+console.log('v13')
 </script>
 <style>
 .cropper-view-box {
