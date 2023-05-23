@@ -189,9 +189,9 @@
                 </div>
             </div>
         </div>
-        <!-- <footer class="text-center mt-5 font-medium"><a href="http://Eminenceinfotech.com">Eminenceinfotech.com</a></footer> -->
+        <!-- <footer class="text-center mt-5 font-medium"><a href="http://Eminenceinfotech.com">Eminenceinfotech.com</a></footer> 
         <footer class="text-center mt-5 font-medium"><a href="https://Eminenceinfotech.com" target="_blank"
-                rel="noopener noreferrer">Eminenceinfotech.com</a></footer>
+                rel="noopener noreferrer">Eminenceinfotech.com</a></footer> -->
     </div>
 </template>
 <script setup>
